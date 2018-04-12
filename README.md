@@ -1,3 +1,3 @@
-# Staff User List
+# Staff User/Post List
 
-This plugin creates a staff page from selected WordPress users.
+This plugin creates a staff shortcode from selected WordPress users or post types.

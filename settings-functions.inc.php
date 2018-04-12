@@ -59,7 +59,7 @@ if ( ! function_exists( 'display_input_field' ) ) :
 			);
 		}
 
-		return $field;
+		echo $field;
 	}
 endif;
 
@@ -125,7 +125,7 @@ if ( ! function_exists( 'display_checkboxes' ) ) :
 			);
 		}
 
-		return $field;
+		echo $field;
 
 	}
 endif;
@@ -176,7 +176,7 @@ if ( ! function_exists( 'display_select' ) ) :
 		}
 		$field .= '</div>';
 
-		return $field;
+		echo $field;
 	}
 endif;
 
@@ -213,6 +213,6 @@ if ( ! function_exists( 'display_link' ) ) :
 			);
 		}
 
-		return $field;
+		echo $field;
 	}
 endif;
