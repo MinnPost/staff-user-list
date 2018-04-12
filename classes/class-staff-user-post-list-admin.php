@@ -197,7 +197,7 @@ class Staff_User_Post_List_Admin {
 		add_settings_section( $page, $title, null, $page );
 
 		$settings = array(
-			'staff_user_role'      => array(
+			'staff_user_role' => array(
 				'title'    => __( 'Staff user role', 'staff-user-post-list' ),
 				'callback' => $callbacks['select'],
 				'page'     => $page,
@@ -209,7 +209,7 @@ class Staff_User_Post_List_Admin {
 					'items'    => $this->get_role_options(),
 				),
 			),
-			'post_type' => array(
+			'post_type'       => array(
 				'title'    => __( 'Additional post type', 'staff-user-post-list' ),
 				'callback' => $callbacks['select'],
 				'page'     => $page,
@@ -221,7 +221,7 @@ class Staff_User_Post_List_Admin {
 					'items'    => $this->get_post_type_options(),
 				),
 			),
-			'post_meta_key'        => array(
+			'post_meta_key'   => array(
 				'title'    => __( 'Post meta key', 'staff-user-post-list' ),
 				'callback' => $callbacks['text'],
 				'page'     => $page,
@@ -232,7 +232,7 @@ class Staff_User_Post_List_Admin {
 					'constant' => '',
 				),
 			),
-			'post_meta_value'      => array(
+			'post_meta_value' => array(
 				'title'    => __( 'Post meta value', 'staff-user-post-list' ),
 				'callback' => $callbacks['text'],
 				'page'     => $page,
@@ -270,6 +270,7 @@ class Staff_User_Post_List_Admin {
 
 			add_settings_field( $id, $title, $callback, $page, $section, $args );
 			register_setting( $section, $id );
+			register_setting( $section, $this->option_prefix . 'staff_ordered' );
 		}
 	}
 
