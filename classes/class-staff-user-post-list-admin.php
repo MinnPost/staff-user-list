@@ -17,6 +17,7 @@ class Staff_User_Post_List_Admin {
 	protected $option_prefix;
 	protected $version;
 	protected $slug;
+	protected $data;
 	//protected $cache;
 
 	/**
@@ -25,14 +26,16 @@ class Staff_User_Post_List_Admin {
 	* @param string $option_prefix
 	* @param string $version
 	* @param string $slug
+	* @param object $data
 	* @param object $cache
 	* @throws \Exception
 	*/
-	public function __construct( $option_prefix, $version, $slug ) {
+	public function __construct( $option_prefix, $version, $slug, $data ) {
 
 		$this->option_prefix = $option_prefix;
 		$this->version       = $version;
 		$this->slug          = $slug;
+		$this->data          = $data;
 		//$this->cache         = $cache;
 
 		//$this->mp_mem_transients = $this->cache->mp_mem_transients;
@@ -273,50 +276,6 @@ class Staff_User_Post_List_Admin {
 			register_setting( $section, $id );
 			register_setting( $section, $this->option_prefix . 'staff_ordered' );
 		}
-	}
-
-	public function get_staff_members() {
-		$users = array();
-
-		$role = get_option( $this->option_prefix . 'staff_user_role', '' );
-		if ( '' !== $role ) {
-			$user_query = get_users(
-				array(
-					'role' => $role,
-				)
-			);
-			if ( $users ) {
-				foreach ( $user_query as $item ) {
-					$users[] = array(
-						'id'   => $item->data->ID,
-						'name' => $item->data->display_name,
-					);
-				}
-			}
-		}
-
-		$post_type       = get_option( $this->option_prefix . 'post_type', '' );
-		$post_meta_key   = get_option( $this->option_prefix . 'post_meta_key', '' );
-		$post_meta_value = get_option( $this->option_prefix . 'post_meta_value', '' );
-
-		if ( '' !== $post_type ) {
-			$args['post_type']      = $post_type;
-			$args['posts_per_page'] = -1;
-			if ( '' !== $post_meta_key && '' !== $post_meta_value ) {
-				$args['meta_key']   = $post_meta_key;
-				$args['meta_value'] = $post_meta_value;
-			}
-			$posts = get_posts( $args );
-			if ( $posts ) {
-				foreach ( $posts as $post ) {
-					$users[] = array(
-						'id'   => $post->ID,
-						'name' => $post->post_title,
-					);
-				}
-			}
-		}
-		return $users;
 	}
 
 	/**

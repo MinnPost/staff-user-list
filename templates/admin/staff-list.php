@@ -3,7 +3,7 @@
 		<?php
 		settings_fields( $tab ) . do_settings_sections( $tab );
 		?>
-		<?php $staff = $this->get_staff_members(); ?>
+		<?php $staff = $this->data->get_staff_members(); ?>
 		<?php if ( ! empty( $staff ) ) : ?>
 			<ul class="m-staff-list">
 				<?php $staff_ordered = get_option( $this->option_prefix . 'staff_ordered', $staff ); ?>

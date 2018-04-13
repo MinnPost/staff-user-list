@@ -38,9 +38,9 @@ class Staff_User_Post_List {
 
 	/**
 	* @var object
-	* Load and initialize the MinnPost_Membership_Member_Level class
+	* Load and initialize the Staff_User_Post_List_Data class
 	*/
-	//public $member_levels;
+	public $data;
 
 	/**
 	* @var object
@@ -88,6 +88,8 @@ class Staff_User_Post_List {
 
 		// wp cache settings
 		//$this->cache = $this->cache();
+		// staf data
+		$this->data = $this->data();
 		// admin settings
 		$this->admin = $this->admin();
 		// front end settings
@@ -118,13 +120,24 @@ class Staff_User_Post_List {
 	}
 
 	/**
+	 * Plugin data
+	 *
+	 * @return object $data
+	 */
+	public function data() {
+		require_once( plugin_dir_path( __FILE__ ) . 'classes/class-staff-user-post-list-data.php' );
+		$data = new Staff_User_Post_List_Data( $this->option_prefix, $this->version, $this->slug );
+		return $data;
+	}
+
+	/**
 	 * Plugin admin
 	 *
 	 * @return object $admin
 	 */
 	public function admin() {
 		require_once( plugin_dir_path( __FILE__ ) . 'classes/class-staff-user-post-list-admin.php' );
-		$admin = new Staff_User_Post_List_Admin( $this->option_prefix, $this->version, $this->slug );
+		$admin = new Staff_User_Post_List_Admin( $this->option_prefix, $this->version, $this->slug, $this->data );
 		add_filter( 'plugin_action_links', array( $this, 'plugin_action_links' ), 10, 2 );
 		return $admin;
 	}
