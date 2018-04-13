@@ -166,7 +166,7 @@ class Staff_User_Post_List_Admin {
 		);
 
 		$this->staff_list( 'staff_list', 'staff_list', $all_field_callbacks );
-		//$this->page_settings( 'page_settings', 'page_settings', $all_field_callbacks );
+		$this->page_settings( 'page_settings', 'page_settings', $all_field_callbacks );
 
 	}
 
@@ -279,9 +279,125 @@ class Staff_User_Post_List_Admin {
 	}
 
 	/**
+	* Fields for the Page Settings tab
+	* This runs add_settings_section once, as well as add_settings_field and register_setting methods for each option
+	*
+	* @param string $page
+	* @param string $section
+	* @param array $callbacks
+	*/
+	private function page_settings( $page, $section, $callbacks ) {
+		$tabs = $this->tabs;
+		foreach ( $tabs as $key => $value ) {
+			if ( $key === $page ) {
+				$title = $value;
+			}
+		}
+		add_settings_section( $page, $title, null, $page );
+
+		$settings = array(
+			'image_size'   => array(
+				'title'    => __( 'Image size', 'staff-user-post-list' ),
+				'callback' => $callbacks['select'],
+				'page'     => $page,
+				'section'  => $section,
+				'args'     => array(
+					'type'     => 'select',
+					'desc'     => '',
+					'constant' => '',
+					'items'    => $this->get_image_sizes(),
+				),
+			),
+			'include_bio'  => array(
+				'title'    => __( 'Include bio?', 'staff-user-post-list' ),
+				'callback' => $callbacks['text'],
+				'page'     => $page,
+				'section'  => $section,
+				'args'     => array(
+					'type'     => 'checkbox',
+					'desc'     => '',
+					'constant' => '',
+				),
+			),
+			'bio_field'    => array(
+				'title'    => __( 'Bio field', 'staff-user-post-list' ),
+				'callback' => $callbacks['select'],
+				'page'     => $page,
+				'section'  => $section,
+				'args'     => array(
+					'type'     => 'select',
+					'desc'     => '',
+					'constant' => '',
+					'items'    => $this->get_staff_fields(),
+				),
+			),
+			'include_name' => array(
+				'title'    => __( 'Include name?', 'staff-user-post-list' ),
+				'callback' => $callbacks['text'],
+				'page'     => $page,
+				'section'  => $section,
+				'args'     => array(
+					'type'     => 'checkbox',
+					'desc'     => '',
+					'constant' => '',
+				),
+			),
+			'name_field'   => array(
+				'title'    => __( 'Name field', 'staff-user-post-list' ),
+				'callback' => $callbacks['select'],
+				'page'     => $page,
+				'section'  => $section,
+				'args'     => array(
+					'type'     => 'select',
+					'desc'     => '',
+					'constant' => '',
+					'items'    => $this->get_staff_fields(),
+				),
+			),
+			'method'       => array(
+				'title'    => __( 'Custom theme method name', 'staff-user-post-list' ),
+				'callback' => $callbacks['text'],
+				'page'     => $page,
+				'section'  => $section,
+				'args'     => array(
+					'type'     => 'text',
+					'desc'     => __( 'If you add a method here, it will receive the $id, $image_size, $include_bio, and $include_name values.', 'staff-user-post-list' ),
+					'constant' => '',
+				),
+			),
+		);
+
+		foreach ( $settings as $key => $attributes ) {
+			$id       = $this->option_prefix . $key;
+			$name     = $this->option_prefix . $key;
+			$title    = $attributes['title'];
+			$callback = $attributes['callback'];
+			$page     = $attributes['page'];
+			$section  = $attributes['section'];
+			$args     = array_merge(
+				$attributes['args'],
+				array(
+					'title'     => $title,
+					'id'        => $id,
+					'label_for' => $id,
+					'name'      => $name,
+				)
+			);
+
+			// if there is a constant and it is defined, don't run a validate function if there is one
+			if ( isset( $attributes['args']['constant'] ) && defined( $attributes['args']['constant'] ) ) {
+				$validate = '';
+			}
+
+			add_settings_field( $id, $title, $callback, $page, $section, $args );
+			register_setting( $section, $id );
+		}
+	}
+
+	/**
 	* WordPress user roles as setting field options
 	*
-	* @param array $items
+	* @return array $items
 	*/
 	private function get_role_options() {
 		$items = array();
@@ -298,7 +414,7 @@ class Staff_User_Post_List_Admin {
 	/**
 	* WordPress post types as setting field options
 	*
-	* @param array $items
+	* @return array $items
 	*/
 	private function get_post_type_options() {
 		$items = array();
@@ -307,6 +423,55 @@ class Staff_User_Post_List_Admin {
 			$items[] = array(
 				'value' => $post_type,
 				'text'  => $post_type,
+			);
+		}
+		return $items;
+	}
+
+	/**
+	* WordPress image sizes as setting field options
+	*
+	* @return array $items
+	*/
+	private function get_image_sizes() {
+		$items = array();
+		$sizes = get_intermediate_image_sizes();
+		foreach ( $sizes as $image_size ) {
+			$items[] = array(
+				'value' => $image_size,
+				'text'  => $image_size,
+			);
+		}
+		return $items;
+	}
+
+	/**
+	* Fields for the staff type as setting field options
+	*
+	* @return array $items
+	*/
+	private function get_staff_fields() {
+		$items = array();
+
+		global $wpdb;
+
+		$role = get_option( $this->option_prefix . 'staff_user_role', '' );
+		if ( '' !== $role ) {
+			$select = "SELECT DISTINCT $wpdb->usermeta.meta_key FROM $wpdb->usermeta";
+		}
+
+		$post_type = get_option( $this->option_prefix . 'post_type', '' );
+
+		if ( '' !== $post_type ) {
+			$select = "SELECT DISTINCT $wpdb->postmeta.meta_key FROM $wpdb->postmeta";
+		}
+
+		$meta = $wpdb->get_results( $select, ARRAY_A );
+
+		foreach ( $meta as $field ) {
+			$items[] = array(
+				'value' => $field['meta_key'],
+				'text'  => $field['meta_key'],
 			);
 		}
 		return $items;

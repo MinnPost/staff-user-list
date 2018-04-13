@@ -49,18 +49,24 @@ class Staff_User_Post_List_Data {
 
 	}
 
-	public function get_staff_members() {
+	public function get_staff_members( $ids = array() ) {
 		$users = array();
 
 		$role = get_option( $this->option_prefix . 'staff_user_role', '' );
 		if ( '' !== $role ) {
-			$user_query = get_users(
-				array(
-					'role' => $role,
-				)
+			$args = array(
+				'role' => $role,
 			);
+
+			if ( ! empty( $ids ) ) {
+				$args['include'] = $ids;
+				$args['orderby'] = 'include';
+			}
+
+			$users = get_users( $args );
+
 			if ( $users ) {
-				foreach ( $user_query as $item ) {
+				foreach ( $users as $item ) {
 					$users[] = array(
 						'id'   => $item->data->ID,
 						'name' => $item->data->display_name,
@@ -81,6 +87,10 @@ class Staff_User_Post_List_Data {
 			if ( '' !== $post_meta_key && '' !== $post_meta_value ) {
 				$args['meta_key']   = $post_meta_key;
 				$args['meta_value'] = $post_meta_value;
+			}
+			if ( ! empty( $ids ) ) {
+				$args['include'] = $ids;
+				$args['orderby'] = 'post__in';
 			}
 			$posts = get_posts( $args );
 			if ( $posts ) {
