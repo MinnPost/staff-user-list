@@ -1,0 +1,33 @@
+/* This is based on jQuery UI */
+
+ul.m-staff-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 40%;
+    li.a-staff-member {
+	    margin: 0 3px 3px 3px;
+	    padding: 0.4em;
+	    padding-left: 1.5em;
+	    transition: -webkit-transform ease-out 0.3s;
+	    -webkit-transform-origin: 50% 50%;
+	    background-image: none;
+	    position: relative;
+	    color: #23282d;
+	    &:hover {
+		    cursor: pointer;
+		}
+	    &.grow {
+	    	-webkit-transform: perspective(800px) translateZ(90px);
+	    }
+	    &.ui-sortable-helper {
+		    cursor: move;
+		}
+	    span {
+	    	position: absolute;
+	    	margin-left: -1.3em;
+	    	background-image: url('https://code.jquery.com/ui/1.10.3/themes/smoothness/images/ui-icons_888888_256x240.png');
+	    	background-position: -128px -48px;
+	    }
+	}
+}

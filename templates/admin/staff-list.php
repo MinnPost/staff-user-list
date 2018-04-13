@@ -8,7 +8,8 @@
 			<ul class="m-staff-list">
 				<?php $staff_ordered = get_option( $this->option_prefix . 'staff_ordered', $staff ); ?>
 				<?php foreach ( $staff_ordered as $staff_member ) : ?>
-					<li class="a-staff-member a-staff-member-<?php echo $staff_member['id']; ?>">
+					<li class="a-staff-member a-staff-member-<?php echo $staff_member['id']; ?> ui-state-default">
+						<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
 						<?php echo $staff_member['name']; ?>
 						<input type="hidden" name="<?php echo $this->option_prefix; ?>staff_ordered[<?php echo $staff_member['id']; ?>][id]" value="<?php echo $staff_member['id']; ?>">
 						<input type="hidden" name="<?php echo $this->option_prefix; ?>staff_ordered[<?php echo $staff_member['id']; ?>][name]" value="<?php echo $staff_member['name']; ?>">
