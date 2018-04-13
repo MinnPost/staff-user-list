@@ -103,6 +103,7 @@ class Staff_User_Post_List {
 	*/
 	private function add_actions() {
 		add_action( 'plugins_loaded', array( $this, 'textdomain' ) );
+		register_activation_hook( __FILE__, array( $this, 'add_roles_capabilities' ) );
 	}
 
 	/**
@@ -146,6 +147,32 @@ class Staff_User_Post_List {
 	 */
 	public function textdomain() {
 		load_plugin_textdomain( 'staff-user-post-list', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	}
+
+	/**
+	* Add roles and capabilities
+	* This adds the manage_staff capability to the admin role
+	*
+	* It also allows other plugins to add the capability to other roles
+	*
+	*/
+	public function add_roles_capabilities() {
+
+		// by default, only administrators can configure the plugin
+		$role = get_role( 'administrator' );
+		$role->add_cap( 'manage_staff' );
+
+		// hook that allows other roles to configure the plugin as well
+		$roles = apply_filters( $this->option_prefix . '_manage_staff', null );
+
+		// for each role that we have, give it the configure salesforce capability
+		if ( null !== $roles ) {
+			foreach ( $roles as $role ) {
+				$role = get_role( $role );
+				$role->add_cap( 'manage_staff' );
+			}
+		}
+
 	}
 
 	/**

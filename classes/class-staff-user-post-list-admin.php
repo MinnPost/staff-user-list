@@ -63,7 +63,7 @@ class Staff_User_Post_List_Admin {
 	*
 	*/
 	public function create_admin_menu() {
-		$capability = 'manage_options';
+		$capability = 'manage_staff';
 		add_users_page( 'Staff User/Post List', 'Staff List', $capability, $this->slug, array( $this, 'show_admin_page' ) );
 	}
 
