@@ -50,9 +50,9 @@ class Staff_User_Post_List {
 
 	/**
 	* @var object
-	* Load and initialize the MinnPost_Membership_Front_End class
+	* Load and initialize the Staff_User_Post_List_Front_End class
 	*/
-	//public $front_end;
+	public $front_end;
 
 	/**
 	 * @var object
@@ -93,7 +93,7 @@ class Staff_User_Post_List {
 		// admin settings
 		$this->admin = $this->admin();
 		// front end settings
-		//$this->front_end = $this->front_end();
+		$this->front_end = $this->front_end();
 
 		$this->add_actions();
 
@@ -148,8 +148,8 @@ class Staff_User_Post_List {
 	 * @return object $front_end
 	 */
 	public function front_end() {
-		require_once( plugin_dir_path( __FILE__ ) . 'classes/class-minnpost-membership-front-end.php' );
-		$front_end = new MinnPost_Membership_Front_End( $this->option_prefix, $this->version, $this->slug, $this->member_levels, $this->cache );
+		require_once( plugin_dir_path( __FILE__ ) . 'classes/class-staff-user-post-list-front-end.php' );
+		$front_end = new Staff_User_Post_List_Front_End( $this->option_prefix, $this->version, $this->slug, $this->data );
 		return $front_end;
 	}
 
