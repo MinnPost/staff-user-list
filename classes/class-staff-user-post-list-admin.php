@@ -455,7 +455,8 @@ class Staff_User_Post_List_Admin {
 
 		global $wpdb;
 
-		$role = get_option( $this->option_prefix . 'staff_user_role', '' );
+		$role   = get_option( $this->option_prefix . 'staff_user_role', '' );
+		$select = '';
 		if ( '' !== $role ) {
 			$select = "SELECT DISTINCT $wpdb->usermeta.meta_key FROM $wpdb->usermeta";
 		}
@@ -464,6 +465,10 @@ class Staff_User_Post_List_Admin {
 
 		if ( '' !== $post_type ) {
 			$select = "SELECT DISTINCT $wpdb->postmeta.meta_key FROM $wpdb->postmeta";
+		}
+
+		if ( '' === $select ) {
+			return $items;
 		}
 
 		$meta = $wpdb->get_results( $select, ARRAY_A );
