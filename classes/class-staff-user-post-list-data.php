@@ -69,6 +69,7 @@ class Staff_User_Post_List_Data {
 				foreach ( $user_objects as $item ) {
 					$users[] = array(
 						'id'   => $item->data->ID,
+						'slug' => sanitize_title( preg_replace( '/(\s\s+|\t|\n)/', ' ', $item->data->display_name ) ),
 						'name' => $item->data->display_name,
 						'type' => 'user',
 						'meta' => get_user_meta( $item->data->ID ),
@@ -93,12 +94,14 @@ class Staff_User_Post_List_Data {
 				$args['orderby'] = 'post__in';
 			}
 			$posts = get_posts( $args );
+
 			if ( $posts ) {
 				foreach ( $posts as $post ) {
-					$key = array_search( $post->post_title, array_column( $users, 'name' ) );
-					if ( ! isset( $key ) ) {
+					$key = array_search( sanitize_title( $post->post_title ), array_column( $users, 'slug' ) );
+					if ( false === $key ) {
 						$users[] = array(
 							'id'   => $post->ID,
+							'slug' => sanitize_title( preg_replace( '/(\s\s+|\t|\n)/', ' ', $post->post_title ) ),
 							'name' => $post->post_title,
 							'type' => 'post',
 							'meta' => get_post_meta( $post->ID ),
