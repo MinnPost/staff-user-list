@@ -63,10 +63,10 @@ class Staff_User_Post_List_Data {
 				$args['orderby'] = 'include';
 			}
 
-			$users = get_users( $args );
+			$user_objects = get_users( $args );
 
-			if ( $users ) {
-				foreach ( $users as $item ) {
+			if ( $user_objects ) {
+				foreach ( $user_objects as $item ) {
 					$users[] = array(
 						'id'   => $item->data->ID,
 						'name' => $item->data->display_name,

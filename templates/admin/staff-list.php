@@ -6,7 +6,12 @@
 		<?php $staff = $this->data->get_staff_members(); ?>
 		<?php if ( ! empty( $staff ) ) : ?>
 			<ul class="m-staff-list">
-				<?php $staff_ordered = get_option( $this->option_prefix . 'staff_ordered', $staff ); ?>
+				<?php
+				$staff_ordered = get_option( $this->option_prefix . 'staff_ordered', '' );
+				if ( '' === $staff_ordered ) {
+					$staff_ordered = $staff;
+				}
+				?>
 				<?php foreach ( $staff_ordered as $staff_member ) : ?>
 					<li class="a-staff-member a-staff-member-<?php echo $staff_member['id']; ?> ui-state-default">
 						<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
