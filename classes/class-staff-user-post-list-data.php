@@ -95,12 +95,15 @@ class Staff_User_Post_List_Data {
 			$posts = get_posts( $args );
 			if ( $posts ) {
 				foreach ( $posts as $post ) {
-					$users[] = array(
-						'id'   => $post->ID,
-						'name' => $post->post_title,
-						'type' => 'post',
-						'meta' => get_post_meta( $post->ID ),
-					);
+					$key = array_search( $post->post_title, array_column( $users, 'name' ) );
+					if ( ! isset( $key ) ) {
+						$users[] = array(
+							'id'   => $post->ID,
+							'name' => $post->post_title,
+							'type' => 'post',
+							'meta' => get_post_meta( $post->ID ),
+						);
+					}
 				}
 			}
 		}
