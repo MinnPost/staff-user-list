@@ -106,6 +106,8 @@ class Staff_User_Post_List_Data {
 							'type' => 'post',
 							'meta' => get_post_meta( $post->ID ),
 						);
+					} else {
+						$users[ $key ]['id'] = $post->ID;
 					}
 				}
 			}
