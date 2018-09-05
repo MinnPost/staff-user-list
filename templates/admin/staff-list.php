@@ -14,8 +14,8 @@
 				?>
 				<?php foreach ( $staff_ordered as $staff_member ) : ?>
 					<?php
-					$key = array_search( $staff_member['name'], array_column( $staff, 'name' ) );
-					if ( isset( $key ) ) {
+					$key = array_search( $staff_member['id'], array_column( $staff, 'id' ) );
+					if ( is_numeric( $key ) ) {
 						?>
 						<li class="a-staff-member a-staff-member-<?php echo $staff_member['id']; ?> ui-state-default">
 							<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
@@ -29,7 +29,7 @@
 				<?php endforeach; ?>
 				<?php foreach ( $staff as $staff_member ) : ?>
 					<?php
-					$key = array_search( $staff_member['name'], array_column( $staff_ordered, 'name' ) );
+					$key = array_search( $staff_member['id'], array_column( $staff_ordered, 'id' ) );
 					if ( empty( $key ) && 0 !== $key ) {
 						?>
 						<li class="a-staff-member a-staff-member-<?php echo $staff_member['id']; ?> ui-state-default">
