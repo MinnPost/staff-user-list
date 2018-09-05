@@ -13,12 +13,34 @@
 				}
 				?>
 				<?php foreach ( $staff_ordered as $staff_member ) : ?>
-					<li class="a-staff-member a-staff-member-<?php echo $staff_member['id']; ?> ui-state-default">
-						<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-						<?php echo $staff_member['name']; ?>
-						<input type="hidden" name="<?php echo $this->option_prefix; ?>staff_ordered[<?php echo $staff_member['id']; ?>][id]" value="<?php echo $staff_member['id']; ?>">
-						<input type="hidden" name="<?php echo $this->option_prefix; ?>staff_ordered[<?php echo $staff_member['id']; ?>][name]" value="<?php echo $staff_member['name']; ?>">
-					</li>
+					<?php
+					$key = array_search( $staff_member['id'], array_column( $staff, 'id' ) );
+					if ( isset( $key ) ) {
+						?>
+						<li class="a-staff-member a-staff-member-<?php echo $staff_member['id']; ?> ui-state-default">
+							<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+							<?php echo $staff_member['name']; ?>
+							<input type="hidden" name="<?php echo $this->option_prefix; ?>staff_ordered[<?php echo $staff_member['id']; ?>][id]" value="<?php echo $staff_member['id']; ?>">
+							<input type="hidden" name="<?php echo $this->option_prefix; ?>staff_ordered[<?php echo $staff_member['id']; ?>][name]" value="<?php echo $staff_member['name']; ?>">
+						</li>
+						<?php
+					}
+					?>
+				<?php endforeach; ?>
+				<?php foreach ( $staff as $staff_member ) : ?>
+					<?php
+					$key = array_search( $staff_member['id'], array_column( $staff_ordered, 'id' ) );
+					if ( empty( $key ) && 0 !== $key ) {
+						?>
+						<li class="a-staff-member a-staff-member-<?php echo $staff_member['id']; ?> ui-state-default">
+							<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+							<?php echo $staff_member['name']; ?> (unsorted)
+							<input type="hidden" name="<?php echo $this->option_prefix; ?>staff_ordered[<?php echo $staff_member['id']; ?>][id]" value="<?php echo $staff_member['id']; ?>">
+							<input type="hidden" name="<?php echo $this->option_prefix; ?>staff_ordered[<?php echo $staff_member['id']; ?>][name]" value="<?php echo $staff_member['name']; ?>">
+						</li>
+						<?php
+					}
+					?>
 				<?php endforeach; ?>
 			</ul>
 		<?php endif; ?>
