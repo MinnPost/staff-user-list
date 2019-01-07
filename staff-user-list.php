@@ -178,7 +178,7 @@ class Staff_User_Post_List {
 		// hook that allows other roles to configure the plugin as well
 		$roles = apply_filters( $this->option_prefix . '_manage_staff', null );
 
-		// for each role that we have, give it the configure salesforce capability
+		// for each role that we have, give it the manage_staff capability
 		if ( null !== $roles ) {
 			foreach ( $roles as $role ) {
 				$role = get_role( $role );
