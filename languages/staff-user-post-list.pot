@@ -1,4 +1,4 @@
-# Copyright (C) 2018 staff-user-post-list
+# Copyright (C) 2019 staff-user-post-list
 # This file is distributed under the same license as the staff-user-post-list package.
 msgid ""
 msgstr ""
@@ -20,46 +20,46 @@ msgstr ""
 #: classes/class-staff-user-post-list-admin.php:97
 msgstr ""
 
-#: classes/class-staff-user-post-list-admin.php:205
+#: classes/class-staff-user-post-list-admin.php:209
 msgid "Staff user role"
 msgstr ""
 
-#: classes/class-staff-user-post-list-admin.php:217
+#: classes/class-staff-user-post-list-admin.php:221
 msgid "Additional post type"
 msgstr ""
 
-#: classes/class-staff-user-post-list-admin.php:229
+#: classes/class-staff-user-post-list-admin.php:233
 msgid "Post meta key"
 msgstr ""
 
-#: classes/class-staff-user-post-list-admin.php:240
+#: classes/class-staff-user-post-list-admin.php:244
 msgid "Post meta value"
 msgstr ""
 
-#: classes/class-staff-user-post-list-admin.php:300
+#: classes/class-staff-user-post-list-admin.php:304
 msgid "Image size"
 msgstr ""
 
-#: classes/class-staff-user-post-list-admin.php:312
+#: classes/class-staff-user-post-list-admin.php:316
 msgid "Include bio?"
 msgstr ""
 
-#: classes/class-staff-user-post-list-admin.php:323
+#: classes/class-staff-user-post-list-admin.php:327
 msgid "Bio field"
 msgstr ""
 
-#: classes/class-staff-user-post-list-admin.php:335
+#: classes/class-staff-user-post-list-admin.php:339
 msgid "Include name?"
 msgstr ""
 
-#: classes/class-staff-user-post-list-admin.php:346
+#: classes/class-staff-user-post-list-admin.php:350
 msgid "Name field"
 msgstr ""
 
-#: classes/class-staff-user-post-list-admin.php:358
+#: classes/class-staff-user-post-list-admin.php:362
 msgid "Custom theme method name"
 msgstr ""
 
-#: classes/class-staff-user-post-list-admin.php:364
+#: classes/class-staff-user-post-list-admin.php:368
 msgid "If you add a method here, it will receive the $id, $image_size, $include_bio, and $include_name values."
 msgstr ""

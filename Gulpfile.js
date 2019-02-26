@@ -12,6 +12,7 @@ const cssnano = require( 'gulp-cssnano' );
 const del = require( 'del' );
 const eslint = require( 'gulp-eslint' );
 const gulp = require( 'gulp' );
+const gulpIf = require( 'gulp-if' );
 const gutil = require( 'gulp-util' );
 const globbing = require( 'gulp-css-globbing' );
 const imagemin = require( 'gulp-imagemin' );
