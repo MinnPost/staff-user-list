@@ -156,6 +156,10 @@ class Staff_User_Post_List_Admin {
 		$page     = isset( $get_data['tab'] ) ? sanitize_key( $get_data['tab'] ) : 'staff_list';
 		$section  = isset( $get_data['tab'] ) ? sanitize_key( $get_data['tab'] ) : 'staff_list';
 
+		if ( ! isset( $get_data['page'] ) || $this->slug !== $get_data['page'] ) {
+			return;
+		}
+
 		require_once( plugin_dir_path( __FILE__ ) . '/../settings-functions.inc.php' );
 
 		$all_field_callbacks = array(
