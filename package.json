@@ -12,7 +12,6 @@
     "url": "https://github.com/MinnPost/staff-user-post-list/issues"
   },
   "homepage": "https://github.com/MinnPost/staff-user-post-list#readme",
-  "dependencies": {
     "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
@@ -20,6 +19,7 @@
     "autoprefixer": "^9.8.0",
     "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
+  "devDependencies": {
     "browser-sync": "^2.26.7",
     "css-mqpacker": "^7.0.0",
     "del": "^5.1.0",
