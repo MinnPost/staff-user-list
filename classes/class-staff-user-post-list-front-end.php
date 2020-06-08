@@ -133,9 +133,11 @@ class Staff_User_Post_List_Front_End {
 	*
 	*/
 	private function get_staff_list_item( $id, $image_size = '', $include_bio = false, $bio = '', $include_name = false, $name = '', $method = '' ) {
-		$content      = '';
-		$include_bio  = filter_var( $include_bio, FILTER_VALIDATE_BOOLEAN );
-		$include_name = filter_var( $include_name, FILTER_VALIDATE_BOOLEAN );
+		$content       = '';
+		$include_bio   = filter_var( $include_bio, FILTER_VALIDATE_BOOLEAN );
+		$include_name  = filter_var( $include_name, FILTER_VALIDATE_BOOLEAN );
+		$bio_field     = get_option( $this->option_prefix . 'bio_field', '' );
+		$include_title = true;
 		if ( '' === $method ) {
 			$content .= '<figure class="a-archive-figure a-author-figure a-author-figure-' . $image_size . '">';
 			if ( '' !== $image_size ) {
@@ -151,7 +153,7 @@ class Staff_User_Post_List_Front_End {
 			}
 			$content .= '</figure>';
 		} else {
-			$content = $method( $id, $image_size, $include_bio, $include_name );
+			$content = $method( $id, $image_size, $bio_field, $include_bio, $include_name, $include_title );
 		}
 		return $content;
 	}
