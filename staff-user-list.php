@@ -2,7 +2,7 @@
 /*
 Plugin Name: Staff User/Post List
 Description: This plugin creates a staff shortcode from selected WordPress users or post types.
-Version: 0.0.4
+Version: 0.0.5
 Author: Jonathan Stegall
 Author URI: https://code.minnpost.com
 Text Domain: staff-user-post-list
@@ -82,7 +82,7 @@ class Staff_User_Post_List {
 	 */
 	public function __construct() {
 
-		$this->version       = '0.0.4';
+		$this->version       = '0.0.5';
 		$this->slug          = 'staff-user-post-list';
 		$this->option_prefix = 'staff_user_post_list_';
 
