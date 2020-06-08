@@ -1,5 +1,5 @@
 jQuery( document ).ready( function( $ ) {
-	if ( $( '.m-staff-list' ).length > 0 ) {
+	if ( 0 < $( '.m-staff-list' ).length ) {
 		$( '.m-staff-list' ).sortable({
 			axis: 'y',
 			cursor: 'move',
