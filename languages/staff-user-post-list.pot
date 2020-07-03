@@ -54,9 +54,17 @@ msgid "Name field"
 msgstr ""
 
 #: classes/class-staff-user-post-list-admin.php:358
+msgid "Include title?"
+msgstr ""
+
+#: classes/class-staff-user-post-list-admin.php:369
+msgid "Title field"
+msgstr ""
+
+#: classes/class-staff-user-post-list-admin.php:381
 msgid "Custom theme method name"
 msgstr ""
 
-#: classes/class-staff-user-post-list-admin.php:364
-msgid "If you add a method here, it will receive the $id, $image_size, $include_bio, and $include_name values."
+#: classes/class-staff-user-post-list-admin.php:387
+msgid "If you add a method here, it will receive the $id, $image_size, $bio_field, $include_bio, $name_field, $include_name, $title_field, and $include_title values."
 msgstr ""
