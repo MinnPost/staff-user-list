@@ -365,6 +365,18 @@ class Staff_User_Post_List_Admin {
 					'constant' => '',
 				),
 			),
+			'title_field'   => array(
+				'title'    => __( 'Title field', 'staff-user-post-list' ),
+				'callback' => $callbacks['select'],
+				'page'     => $page,
+				'section'  => $section,
+				'args'     => array(
+					'type'     => 'select',
+					'desc'     => '',
+					'constant' => '',
+					'items'    => $this->get_staff_fields(),
+				),
+			),
 			'method'       => array(
 				'title'    => __( 'Custom theme method name', 'staff-user-post-list' ),
 				'callback' => $callbacks['text'],
@@ -372,7 +384,7 @@ class Staff_User_Post_List_Admin {
 				'section'  => $section,
 				'args'     => array(
 					'type'     => 'text',
-					'desc'     => __( 'If you add a method here, it will receive the $id, $image_size, $include_bio, $bio_field, $include_name, and $include_title values.', 'staff-user-post-list' ),
+					'desc'     => __( 'If you add a method here, it will receive the $id, $image_size, $bio_field, $include_bio, $name_field, $include_name, $title_field, and $include_title values.', 'staff-user-post-list' ),
 					'constant' => '',
 				),
 			),
