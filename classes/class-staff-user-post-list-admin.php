@@ -94,7 +94,7 @@ class Staff_User_Post_List_Admin {
 		$get_data = filter_input_array( INPUT_GET, FILTER_SANITIZE_STRING );
 		?>
 		<div class="wrap">
-			<h1><?php _e( get_admin_page_title() , 'staff-user-post-list' ); ?></h1>
+			<h1><?php _e( get_admin_page_title(), 'staff-user-post-list' ); ?></h1>
 
 			<?php
 			$tabs = $this->tabs;
@@ -130,7 +130,8 @@ class Staff_User_Post_List_Admin {
 		echo '<h2 class="nav-tab-wrapper">';
 		foreach ( $tabs as $tab_key => $tab_caption ) {
 			$active = $current_tab === $tab_key ? ' nav-tab-active' : '';
-			echo sprintf( '<a class="nav-tab%1$s" href="%2$s">%3$s</a>',
+			echo sprintf(
+				'<a class="nav-tab%1$s" href="%2$s">%3$s</a>',
 				esc_attr( $active ),
 				esc_url( '?page=' . $this->slug . '&tab=' . $tab_key ),
 				esc_html( $tab_caption )
@@ -296,7 +297,7 @@ class Staff_User_Post_List_Admin {
 		add_settings_section( $page, $title, null, $page );
 
 		$settings = array(
-			'image_size'   => array(
+			'image_size'    => array(
 				'title'    => __( 'Image size', 'staff-user-post-list' ),
 				'callback' => $callbacks['select'],
 				'page'     => $page,
@@ -308,7 +309,7 @@ class Staff_User_Post_List_Admin {
 					'items'    => $this->get_image_sizes(),
 				),
 			),
-			'include_bio'  => array(
+			'include_bio'   => array(
 				'title'    => __( 'Include bio?', 'staff-user-post-list' ),
 				'callback' => $callbacks['text'],
 				'page'     => $page,
@@ -319,7 +320,7 @@ class Staff_User_Post_List_Admin {
 					'constant' => '',
 				),
 			),
-			'bio_field'    => array(
+			'bio_field'     => array(
 				'title'    => __( 'Bio field', 'staff-user-post-list' ),
 				'callback' => $callbacks['select'],
 				'page'     => $page,
@@ -331,7 +332,7 @@ class Staff_User_Post_List_Admin {
 					'items'    => $this->get_staff_fields(),
 				),
 			),
-			'include_name' => array(
+			'include_name'  => array(
 				'title'    => __( 'Include name?', 'staff-user-post-list' ),
 				'callback' => $callbacks['text'],
 				'page'     => $page,
@@ -342,7 +343,7 @@ class Staff_User_Post_List_Admin {
 					'constant' => '',
 				),
 			),
-			'name_field'   => array(
+			'name_field'    => array(
 				'title'    => __( 'Name field', 'staff-user-post-list' ),
 				'callback' => $callbacks['select'],
 				'page'     => $page,
@@ -377,7 +378,7 @@ class Staff_User_Post_List_Admin {
 					'items'    => $this->get_staff_fields(),
 				),
 			),
-			'method'       => array(
+			'method'        => array(
 				'title'    => __( 'Custom theme method name', 'staff-user-post-list' ),
 				'callback' => $callbacks['text'],
 				'page'     => $page,
