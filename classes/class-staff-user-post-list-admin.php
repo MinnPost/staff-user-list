@@ -460,6 +460,15 @@ class Staff_User_Post_List_Admin {
 	private function get_image_sizes() {
 		$items = array();
 		$sizes = get_intermediate_image_sizes();
+		/*
+		 * Remove filter preventing WordPress from reading the sizes, it's meant
+		 * to prevent creation of intermediate files, which are not really being used.
+		 */
+		if ( defined( 'WPCOM_IS_VIP_ENV' ) && WPCOM_IS_VIP_ENV ) {
+			remove_filter( 'intermediate_image_sizes', 'wpcom_intermediate_sizes' );
+			$sizes = get_intermediate_image_sizes();
+			add_filter( 'intermediate_image_sizes', 'wpcom_intermediate_sizes' ); // Re-add the filter.
+		}
 		foreach ( $sizes as $image_size ) {
 			$items[] = array(
 				'value' => $image_size,
