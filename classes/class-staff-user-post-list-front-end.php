@@ -84,6 +84,7 @@ class Staff_User_Post_List_Front_End {
 	*/
 	private function get_staff_member( $sorted = true ) {
 		$image_size    = get_option( $this->option_prefix . 'image_size', '' );
+		$image_size    = apply_filters( 'staff_user_post_list_image_size', $image_size );
 		$include_bio   = get_option( $this->option_prefix . 'include_bio', false );
 		$bio_field     = get_option( $this->option_prefix . 'bio_field', '' );
 		$include_name  = get_option( $this->option_prefix . 'include_name', false );
