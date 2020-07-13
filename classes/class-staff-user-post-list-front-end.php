@@ -68,7 +68,7 @@ class Staff_User_Post_List_Front_End {
 		if ( ! empty( $staff ) ) {
 			$output .= '<ul class="m-staff-list m-staff-list-bios">';
 			foreach ( $staff as $staff_member ) {
-				$output .= '<li class="m-staff-member m-staff-member-' . $staff_member['id'] . '">' . $staff_member['content'] . '</li>';
+				$output .= '<li class="m-staff-member-info m-staff-member-info-excerpt m-staff-member-info-singular m-staff-member-info-single m-staff-member-info-single-' . $staff_member['id'] . '">' . $staff_member['content'] . '</li>';
 			}
 			$output .= '</ul>';
 		}
