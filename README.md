@@ -1,3 +1,3 @@
-# Staff User/Post List
+# Staff User List
 
-This plugin creates a staff shortcode from selected WordPress users or post types.
+This plugin creates a staff shortcode from a selected WordPress user role.

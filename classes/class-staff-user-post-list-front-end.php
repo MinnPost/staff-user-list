@@ -64,7 +64,7 @@ class Staff_User_Post_List_Front_End {
 	*/
 	public function mp_staff( $atts, $content ) {
 		$output = '';
-		$staff  = $this->get_staff_member( true );
+		$staff  = $this->get_staff_member();
 		if ( ! empty( $staff ) ) {
 			$output .= '<ul class="m-staff-list m-staff-list-bios">';
 			foreach ( $staff as $staff_member ) {
@@ -82,7 +82,7 @@ class Staff_User_Post_List_Front_End {
 	* @return array $staff
 	*
 	*/
-	private function get_staff_member( $sorted = true ) {
+	private function get_staff_member( $sorted = false ) {
 		$image_size    = get_option( $this->option_prefix . 'image_size', '' );
 		$image_size    = apply_filters( 'staff_user_post_list_image_size', $image_size );
 		$include_bio   = get_option( $this->option_prefix . 'include_bio', false );
@@ -93,13 +93,6 @@ class Staff_User_Post_List_Front_End {
 		$title_field   = get_option( $this->option_prefix . 'title_field', '' );
 		$method        = get_option( $this->option_prefix . 'method', '' );
 		$staff_list    = $this->data->get_staff_members();
-		if ( true === $sorted ) {
-			$staff_list = get_option( $this->option_prefix . 'staff_ordered', $staff_list );
-			if ( '' === $method ) {
-				$staff_list_ids = array_column( $staff_list, 'id' );
-				$staff_list     = $this->data->get_staff_members( $staff_list_ids );
-			}
-		}
 
 		$staff = array();
 		foreach ( $staff_list as $staff_member ) {

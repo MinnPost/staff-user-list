@@ -54,9 +54,6 @@ class Staff_User_Post_List_Admin {
 		if ( is_admin() ) {
 			add_action( 'admin_menu', array( $this, 'create_admin_menu' ) );
 			add_action( 'admin_init', array( $this, 'admin_settings_form' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts_and_styles' ) );
-			//add_action( 'admin_post_post_member_level', array( $this, 'prepare_member_level_data' ) );
-			//add_action( 'admin_post_delete_member_level', array( $this, 'delete_member_level' ) );
 		}
 
 	}
@@ -67,7 +64,7 @@ class Staff_User_Post_List_Admin {
 	*/
 	public function create_admin_menu() {
 		$capability = 'manage_staff';
-		add_users_page( 'Staff User/Post List', 'Staff List', $capability, $this->slug, array( $this, 'show_admin_page' ) );
+		add_users_page( 'Staff User List', 'Staff List', $capability, $this->slug, array( $this, 'show_admin_page' ) );
 	}
 
 
@@ -102,9 +99,6 @@ class Staff_User_Post_List_Admin {
 			$this->render_tabs( $tabs, $tab );
 
 			switch ( $tab ) {
-				case 'staff_list':
-					require_once( plugin_dir_path( __FILE__ ) . '/../templates/admin/staff-list.php' );
-					break;
 				case 'page_settings':
 					require_once( plugin_dir_path( __FILE__ ) . '/../templates/admin/settings.php' );
 					break;
@@ -172,19 +166,6 @@ class Staff_User_Post_List_Admin {
 	}
 
 	/**
-	* Admin styles. Load the CSS and/or JavaScript for the plugin's settings
-	*
-	* @return void
-	*/
-	public function admin_scripts_and_styles() {
-		wp_enqueue_style( $this->slug . '-admin', plugins_url( 'assets/css/' . $this->slug . '-admin.min.css', dirname( __FILE__ ) ), array(), $this->version, 'all' );
-		wp_enqueue_script( $this->slug . '-admin', plugins_url( 'assets/js/' . $this->slug . '-admin.min.js', dirname( __FILE__ ) ), array( 'jquery' ), $this->version, true );
-		wp_enqueue_script( 'admin-js' );
-		wp_enqueue_script( 'jquery-ui-core' );
-		wp_enqueue_script( 'jquery-ui-sortable' );
-	}
-
-	/**
 	* Fields for the Staff List tab
 	* This runs add_settings_section once, as well as add_settings_field and register_setting methods for each option
 	*
@@ -214,7 +195,7 @@ class Staff_User_Post_List_Admin {
 					'items'    => $this->get_role_options(),
 				),
 			),
-			'post_type'       => array(
+			/*'post_type'       => array(
 				'title'    => __( 'Additional post type', 'staff-user-post-list' ),
 				'callback' => $callbacks['select'],
 				'page'     => $page,
@@ -247,7 +228,7 @@ class Staff_User_Post_List_Admin {
 					'desc'     => '',
 					'constant' => '',
 				),
-			),
+			),*/
 
 		);
 
@@ -275,7 +256,6 @@ class Staff_User_Post_List_Admin {
 
 			add_settings_field( $id, $title, $callback, $page, $section, $args );
 			register_setting( $section, $id );
-			register_setting( $section, $this->option_prefix . 'staff_ordered' );
 		}
 	}
 
